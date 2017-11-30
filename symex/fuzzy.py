@@ -489,17 +489,11 @@ class concolic_int(int):
   ## Exercise 2: your code here.
   ## Implement symbolic division and multiplication.
   def __mul__(self, o):
-    if isinstance(o, conolic_int):
-      res = self.__v * o.__v
-    else:
-      res = self.__v * o
+    res = self.__v * o
     return concolic_int(sym_multiply(ast(self), ast(o)), res)
 
   def __div__(self, o):
-    if isinstance(o, conolic_int):
-      res = self.__v / o.__v
-    else:
-      res = self.__v / o
+    res = self.__v / o
     return concolic_int(sym_divide(ast(self), ast(o)), res)
 
   def _sym_ast(self):
