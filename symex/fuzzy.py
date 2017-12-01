@@ -691,7 +691,7 @@ def concolic_test(testfunc, maxiter = 100, verbose = 0):
       for (c, caller) in zip(cur_path_constr, cur_path_constr_callers):
         print indent(z3expr(c, True)), '@', '%s:%d' % (caller[0], caller[1])
 
-      for (c, caller) in zip(cur_path_constr, cur_path_constr_callers):
+      for c in cur_path_constr:
         newExp = sym_not(c)
         if newExp not in checked:
           checked.add(newExp)
