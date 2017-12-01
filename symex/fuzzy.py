@@ -692,11 +692,15 @@ def concolic_test(testfunc, maxiter = 100, verbose = 0):
         print indent(z3expr(c, True)), '@', '%s:%d' % (caller[0], caller[1])
 
       for c in cur_path_constr:
+        print("in loop")
         newExp = sym_not(c)
+        print("not of path condition taken")
         if newExp not in checked:
+          print 'in if condition'
           checked.add(newExp)
           (ok, model) = fork_and_check(c)
           if ok == z3.sat:
+            print 'in if condition 2'
             inputs.add(newExp, caller)
 
     ## for each branch, invoke Z3 to find an input that would go
