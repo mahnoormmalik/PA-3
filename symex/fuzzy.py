@@ -691,6 +691,14 @@ def concolic_test(testfunc, maxiter = 100, verbose = 0):
       for (c, caller) in zip(cur_path_constr, cur_path_constr_callers):
         print indent(z3expr(c, True)), '@', '%s:%d' % (caller[0], caller[1])
 
+      for (c, caller) in zip(cur_path_constr, cur_path_constr_callers):
+        newExp = sym_not(c)
+        if newExp not in checked:
+          checked.add(newExp)
+          (ok, model) = fork_and_check(c)
+          if ok == z3.sat:
+            inputs.add(newExp, caller)
+
     ## for each branch, invoke Z3 to find an input that would go
     ## the other way, and add it to the list of inputs to explore.
 
