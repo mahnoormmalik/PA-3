@@ -695,7 +695,7 @@ def concolic_test(testfunc, maxiter = 100, verbose = 0):
         newExp = sym_not(c)
         if newExp not in checked:
           checked.add(newExp)
-          (ok, model) = fork_and_check(c)
+          (ok, model) = fork_and_check(newExp)
           if ok == z3.sat:
             inputs.add(model, caller)
 
