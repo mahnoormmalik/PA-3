@@ -697,7 +697,7 @@ def concolic_test(testfunc, maxiter = 100, verbose = 0):
           checked.add(newExp)
           (ok, model) = fork_and_check(c)
           if ok == z3.sat:
-            inputs.add(newExp, caller)
+            inputs.add(model, caller)
 
     ## for each branch, invoke Z3 to find an input that would go
     ## the other way, and add it to the list of inputs to explore.
